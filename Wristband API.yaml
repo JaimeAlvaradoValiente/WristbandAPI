@@ -1,0 +1,117 @@
+---
+openapi: 3.0.0
+info:
+  title: Wristband API
+  description: API asociada al dispositivo del bastón
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/JaimeAlvarado/WristBand/1.0.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /distance:
+    get:
+      summary: obtener la distancia entre el bastón y la pulsera.
+      description: |
+        Pasando un id del bastón se obtiene la distancia entre este y la pulsera
+      operationId: getDistance
+      parameters:
+      - name: idStick
+        in: query
+        description: id del bastón
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: distancia entre bastón y pulsera
+          content:
+            application/json:
+              schema:
+                type: integer
+        "400":
+          description: id del bastón incorrecto
+  /localization:
+    get:
+      summary: obtener la localización de la pulsera
+      description: |
+        Pasando un id de la pulsera  se obtiene su localización
+      operationId: getLocalization
+      parameters:
+      - name: idWrist
+        in: query
+        description: id de la pulsera
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: localización
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Localization'
+        "400":
+          description: dispositivo incorrecto
+    put:
+      summary: activa o desactiva la ubicación
+      description: |
+        Activar o desactivar la ubicación en función de un valor
+      operationId: putLocalization
+      parameters:
+      - name: idWrist
+        in: query
+        description: id de la pulsera
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      - name: activate
+        in: query
+        description: valor para activar o desactivar
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      responses:
+        "400":
+          description: pulsera incorrecta
+        "404":
+          description: pulsera no encontrada
+components:
+  schemas:
+    Localization:
+      required:
+      - altitud
+      - heading
+      - latitud
+      - longitud
+      type: object
+      properties:
+        latitud:
+          type: integer
+          format: float
+        longitud:
+          type: integer
+          format: float
+        altitud:
+          type: integer
+          format: float
+        heading:
+          type: integer
+          format: float
