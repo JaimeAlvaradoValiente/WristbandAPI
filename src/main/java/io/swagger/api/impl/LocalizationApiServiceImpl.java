@@ -19,6 +19,7 @@ import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaJerseyServerCodegen", date = "2020-11-13T17:20:56.547Z[GMT]")public class LocalizationApiServiceImpl extends LocalizationApiService {
     @Override
     public Response getLocalization( @NotNull Integer idWrist, SecurityContext securityContext) throws NotFoundException {
+        System.out.println("Recibiendo petición para ofrecer la localización");
         if (idWrist == null) {
             System.out.println ("Se ha introducido un id de dispositivo incorrecto");
             return Response.status(Response.Status.BAD_REQUEST).entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "¡Dispositivo incorrecto!")).build();
