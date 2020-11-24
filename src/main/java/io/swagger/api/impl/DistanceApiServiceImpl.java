@@ -18,7 +18,15 @@ import javax.validation.constraints.*;
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaJerseyServerCodegen", date = "2020-11-13T17:20:56.547Z[GMT]")public class DistanceApiServiceImpl extends DistanceApiService {
     @Override
     public Response getDistance( @NotNull Integer idStick, SecurityContext securityContext) throws NotFoundException {
-        // do some magic!
-        return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+        System.out.println("Recibiendo petición para calcular la distancia entre el bastón y la pulsera");
+
+        if (idStick == null) {
+            System.out.println ("Se ha introducido un id del bastón incorrecto");
+            return Response.status(Response.Status.BAD_REQUEST).entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "¡Dispositivo incorrecto!")).build();
+        }
+        else {
+            System.out.println("Obteniendo distancia entre pulsera y bastón con id " + idStick);
+            return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "300")).build();
+        }
     }
 }
