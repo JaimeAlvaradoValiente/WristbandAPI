@@ -140,13 +140,11 @@ import javax.validation.Valid;
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Localization {\n");
     
-    sb.append("    latitud: ").append(toIndentedString(latitud)).append("\n");
-    sb.append("    longitud: ").append(toIndentedString(longitud)).append("\n");
-    sb.append("    altitud: ").append(toIndentedString(altitud)).append("\n");
-    sb.append("    heading: ").append(toIndentedString(heading)).append("\n");
-    sb.append("}");
+    sb.append(toIndentedString(latitud)).append(",");
+    sb.append(toIndentedString(longitud)).append(",");
+    sb.append(toIndentedString(altitud)).append(",");
+    sb.append(toIndentedString(heading));
     return sb.toString();
   }
 
